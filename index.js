@@ -1,60 +1,7 @@
 import readline from 'readline-sync';
 import inquirer from 'inquirer'
 import fs from 'fs';
-import $ from 'jquery';
-class Person {
-    constructor(name, ID, email) {
-        this.name = name;
-        this.ID = ID,
-        this.email = email;
-    }
-    displayInformation () {
-        console.log(`
-        name: ${this.name}
-        ID: ${this.ID}
-        email: ${this.email}`)
-    }
-}
-
-class Manager extends Person {
-    constructor(name, ID, email, number) {
-        super(name, ID, email);
-        this.number = number;
-        this.type = "Manager";
-    }
-
-    displayInformation() {
-        super.displayInformation();
-        console.log(        `number: ${this.number}`);
-    }
-
-}
-class Engineer extends Person {
-    constructor(name, ID, email, gitHub) {
-        super(name, ID, email);
-        this.gitHub = gitHub;
-        this.type = "Engineer";
-    }
-    displayInformation() {
-        super.displayInformation();
-        console.log(`       gitHub: ${this.gitHub}`);
-    }
-}
-
-class Intern extends Person {
-    constructor(name, ID, email, school) {
-        super(name, ID, email);
-        this.school = school;
-        this.type = "Intern";
-    }
-    displayInformation() {
-        super.displayInformation();
-        console.log(`       school: ${this.school}`);
-    }
-}
-
-// On load, enter manager then team manager.
-// then prompt for engineer or associaate or finish
+import {Manager, Engineer, Intern} from "./lib/classes.js";
 
 const finalEmployees = [];
 
@@ -167,9 +114,6 @@ const createIntern = () => {
 const html_template = (finalEmployees) => { 
 }
 
-
-
-
 const onQuit = () => {
 const finalArr = [];
 var currRow = [];
@@ -253,8 +197,8 @@ var row = "<div class='row mb-3'>";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    ${container}
 
+    ${container}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="./index.js"></script>
@@ -350,4 +294,4 @@ loadingQuestion([
 
 
 
-// module.exports = {Manager, Engineer, Intern}
+module.exports = {Manager, Engineer, Intern, onQuit, }
