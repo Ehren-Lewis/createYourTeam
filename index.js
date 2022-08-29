@@ -1,5 +1,7 @@
 import readline from 'readline-sync';
 import inquirer from 'inquirer'
+import fs from 'fs';
+import $ from 'jquery';
 class Person {
     constructor(name, ID, email) {
         this.name = name;
@@ -161,44 +163,71 @@ const createIntern = () => {
 })
 }
 
-const onQuit = () => {
 
-    const numberOfRows = finalEmployees.length // 3 + 1;
-    const container = $(".container")
-    const row = $("<div class='row'>")
+const html_template = (finalEmployees) => { 
+}
+
+
+
+
+const onQuit = () => {
+const finalArr = [];
+var currRow = [];
+var container = "<div class='container'>";
+var row = "<div class='row'>";
 
     for (let i = 0; i < finalEmployees.length; i++ ) {
-        if ( (i + +1 ) %  3 == 0) {
-            container.append(row);
-        }
-
         let roleLi = ``;
 
         switch (finalEmployees[i].type) {
-            case "Manager":
-                roleLi = `<li class='list-group-item>Number: ${finalEmployees[i].number}</li>`
-                break;
-            case "Engineer":
-                roleLi = `<li class='list-group-item>Number: ${finalEmployees[i].gitHub}</li>`
-                break;
-            case "Intern":
-                roleLi = `<li class='list-group-item>Number: ${finalEmployees[i].school}</li>`
-                break;
+    case "Manager":
+        roleLi = `<li class='list-group-item>Number: ${finalEmployees[i].number}</li>`
+        break;
+    case "Engineer":
+        roleLi = `<li class='list-group-item>GitHub: ${finalEmployees[i].gitHub}</li>`
+        break;
+    case "Intern":
+        roleLi = `<li class='list-group-item>School: ${finalEmployees[i].school}</li>`
+        break;
         }
 
-        const card = $("<div class='card'></div>");
-        const cardBody = $("<div class='card-body'></div");
-        cardBody.append(`<h5 class='card-title'>${finalEmployees[i].name}</div>`);
-        cardBody.apend(`<h6 class='card-subtitle'>${finalEmployees[i].type}</div>`);
-        cardBody.append(
-`<ul class='list-group'>
-    <li class='list-group-item'>ID: </li>
-    <li class='list-group-item'>Email: </li>
-    ${roleLi}
-</ul>`)
-        card.append(cardBody);
+        if ((i + 1) % 3 == 0) {
+            let currentCard =`
+<div class='card'>
+    <div class='card-body'>
+        <h5 class='card-title'>${finalEmployees[i].name}</div>
+        <h6 class='card-subtitle'>${finalEmployees[i].type}</div>
+        <ul class='list-group'>
+            <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
+            <li class='list-group-item'>Email: ${finalEmployees[i].email}</li>
+            ${roleLi}
+        </ul>
+    </div>
+</div>
+`           
+            row += currentCard;
+            row += "</div>";
+            container += row;
+            console.log(row)
+            row = "<div class='row'>";
+            continue;
+            
+        }
+        let currentCard =`
+<div class='card'>
+    <div class='card-body'>
+        <h5 class='card-title'>${finalEmployees[i].name}</div>
+        <h6 class='card-subtitle'>${finalEmployees[i].type}</div>
+        <ul class='list-group'>
+            <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
+            <li class='list-group-item'>Email: ${finalEmployees[i].email}</li>
+            ${roleLi}
+        </ul>
+    </div>
+</div>
+`
+    row += currentCard;
     }
-
 }
 
 const loadingQuestion = inquirer.createPromptModule();
