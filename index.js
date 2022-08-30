@@ -126,7 +126,7 @@ const createIntern = () => {
 
 // Handles all of input given at the end of the prompts 
 const onQuit = () => {
-;
+
 var container = "<div class='container mt-5'>\n";
 var row = "<div class='row mb-3'>";
 
@@ -211,7 +211,7 @@ ${htmlBottom}
 `;
 
     // writing to the file 
-    fs.writeFile("index.html", html, (err) => {
+    fs.writeFile("./dist/index.html", html, (err) => {
         if (err) {
             console.log('err');
         } else {

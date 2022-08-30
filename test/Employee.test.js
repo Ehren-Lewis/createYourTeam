@@ -4,39 +4,50 @@ const Employee  = require("../lib/Employee.js");
 
 describe("Initialization", () => {
     it("Checks to see if object is an instance of the Employee class", ()=> {
-        // Assign
 
         const firstEmployee =  new Employee();
-        // Assert
 
         expect(firstEmployee instanceof Employee).toEqual(true);
         
-        // Act
     });
 })
 
-// describe("Get Name", ()=> {
-//     it("Should return the correct name when given during instantiation", () => {
-//         const employeeNameTest = new Employee("Freddy", 100213, "FredGuilly@gmail.com");
+describe("Get Name", ()=> {
+    it("Should return the correct name given during instantiation", () => {
+        const employeeNameTest = new Employee("Freddy", 100213, "FredGuilly@gmail.com");
 
+        const result = employeeNameTest.getName();
 
-//     })
-// })
+        expect(employeeNameTest.name).toEqual(result);
+    })
+})
 
-// describe("Get ID", ()=> {
-//     it("Should return the correct name ID given during instantiation", () => {
-        
-//     })
-// })
+describe("Get ID", ()=> {
+    it("Should return the correct ID given during instantiation", () => {
+        const employeeIDTest = new Employee("Freddy", 100213, "FredGuilly@gmail.com");
 
-// describe("Should return the correct email when given during instantiation", ()=> {
-//     it(" ", () => {
-        
-//     })
-// })
+        const result = employeeIDTest.getID();
 
-// describe("Should return the correct role when given during instantiation", ()=> {
-//     it(" ", () => {
-        
-//     })
-// })
+        expect(employeeIDTest.ID).toEqual(result);
+    })
+})
+
+describe("Get Email", ()=> {
+    it("Should return the correct email given during instantiation", () => {
+        const employeeEmailTest = new Employee("Freddy", 100213, "FredGuilly@gmail.com");
+
+        const result = employeeEmailTest.getEmail();
+
+        expect(employeeEmailTest.email).toEqual(result);
+    })
+})
+
+describe("Get role", ()=> {
+    it("Should return the correct role given during instantiation", () => {
+        const employeeRoleTest = new Employee("Freddy", 100213, "FredGuilly@gmail.com");
+
+        const result = employeeRoleTest.getRole();
+
+        expect(employeeRoleTest.role).toEqual(result);
+    })
+})
