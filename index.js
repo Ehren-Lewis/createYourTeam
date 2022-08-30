@@ -1,17 +1,22 @@
 
-// const readline = require("readline-sync");
+// required modules for user input and writing files 
 const inquirer = require("inquirer");
 const fs = require("fs");
+
+// personal classes I defined 
 const Employee = require("./lib/Employee.js");
 const Manager = require("./lib/Manager.js");
-const Engineer = require("./lib/Engineer");
+const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 
-
+// From the html template I created 
 const htmlTop = require("./src/htmltemplate.js");
 const htmlBottom = require("./src/htmlBottom.js");
 
+// global list for easy access and no returns
 const finalEmployees = [];
+
+// prompt for engineer, only on call will it run
 
 const createEngineer = () => {
     const engineerPrompt = inquirer.createPromptModule();
@@ -33,7 +38,7 @@ const createEngineer = () => {
     },   
     {
     "name": "engineerGitHub",
-    "message": "What is the engineer's GitHub?",
+    "message": "What is the engineer's GitHub? (just the username) ",
     "type": "input"
     },
     {
@@ -66,6 +71,7 @@ const createEngineer = () => {
 })
 }
 
+// prompt for intern, only on call will it run
 const createIntern = () => {
     const internPrompt = inquirer.createPromptModule();
     internPrompt([
@@ -117,37 +123,44 @@ const createIntern = () => {
 })
 }
 
+
+// Handles all of input given at the end of the prompts 
 const onQuit = () => {
-const finalArr = [];
-var currRow = [];
+;
 var container = "<div class='container mt-5'>\n";
 var row = "<div class='row mb-3'>";
 
     for (let i = 0; i < finalEmployees.length; i++ ) {
         let roleLi = ``;
+        console.log(finalEmployees[i].role);
 
-        switch (finalEmployees[i].type) {
+        switch (finalEmployees[i].role) {
     case "Manager":
-        roleLi = `<li class='list-group-item'>Number: ${finalEmployees[i].number}</li>`
+        roleLi = `<li class='list-group-item'>Number: ${finalEmployees[i].officeNumber}</li>`
         break;
     case "Engineer":
-        roleLi = `<li class='list-group-item'>GitHub: ${finalEmployees[i].gitHub}</li>`
+        roleLi = `<li class='list-group-item'>GitHub: <a class='link-dark' href='https://github.com/${finalEmployees[i].gitHub}' target='_blank'>${finalEmployees[i].gitHub}</a></li>`
         break;
     case "Intern":
         roleLi = `<li class='list-group-item'>School: ${finalEmployees[i].school}</li>`
         break;
         }
 
+
+        // All template literals are on the first line 
+        // due to how template litereals will count spaces in the string 
         if ((i + 1) % 3 == 0) {
+
+            // this is to only allow 3 cards on each row 
             let currentCard =`
 <div class='col-3'>
     <div class='card'>
         <div class='card-body'>
             <h5 class='card-title'>${finalEmployees[i].name}</h5>
-            <h6 class='card-subtitle'>${finalEmployees[i].type}</h6>
+            <h6 class='card-subtitle mb-1'>${finalEmployees[i].role}</h6>
             <ul class='list-group'>
                 <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
-                <li class='list-group-item'>Email: ${finalEmployees[i].email}</li>
+                <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='list-dark'>${finalEmployees[i].email}</a></li>
                 ${roleLi}
             </ul>
         </div>
@@ -166,10 +179,10 @@ var row = "<div class='row mb-3'>";
     <div class='card'>
         <div class='card-body'>
             <h5 class='card-title'>${finalEmployees[i].name}</h5>
-            <h6 class='card-subtitle'>${finalEmployees[i].type}</h6>
+            <h6 class='card-subtitle mb-1'>${finalEmployees[i].role}</h6>
             <ul class='list-group'>
                 <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
-                <li class='list-group-item'>Email: ${finalEmployees[i].email}</li>
+                <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='link-dark' >${finalEmployees[i].email}</a></li>
                 ${roleLi}
             </ul>
         </div>
@@ -179,6 +192,8 @@ var row = "<div class='row mb-3'>";
     row += currentCard;
     }
 
+
+    // if there is anything left in the row, append it to DOM 
     if ( row ) {
         row += "</div>\n"
         container += row;
@@ -188,12 +203,14 @@ var row = "<div class='row mb-3'>";
     }
 
 
-const html = `
+    // html file generation 
+    const html = `
 ${htmlTop}    
 ${container}
 ${htmlBottom}
 `;
 
+    // writing to the file 
     fs.writeFile("index.html", html, (err) => {
         if (err) {
             console.log('err');
@@ -204,6 +221,8 @@ ${htmlBottom}
 
 
 
+    // guide using arrays I created 
+    // to more easily create the code above with html elements 
     // for (let i = 0; i < 8; i++) {
     //     if ( ( i + 1 ) % 3 == 0) {
     //         currRow.push(i);
@@ -224,6 +243,8 @@ ${htmlBottom}
 
 
 
+// Runs on app initialization 
+// Team manager will always be called so it is first 
 console.log("Welcome to your team Builder!");
 
 const loadingQuestion = inquirer.createPromptModule();

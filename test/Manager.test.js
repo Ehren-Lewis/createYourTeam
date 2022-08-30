@@ -1,5 +1,3 @@
-// import  team from "../lib/classes.js";
-// const {Employee, Manager, Engineer, Intern } = team;
 const  Manager  = require("../lib/Manager.js");
 
 describe("Initialization", () => {
