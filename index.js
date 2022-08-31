@@ -45,7 +45,7 @@ const createEngineer = () => {
     "name":"whichType",
     "message": "Would you like to input an engineer, intern, or exit?",
     "type": "list",
-    "choices": ["Engineer", "Intern", "Quit"]
+    "choices": ["Engineer", "Intern", "Finish"]
     }
 
 ]).then( (answers) => {
@@ -62,7 +62,7 @@ const createEngineer = () => {
         case "Intern":
             createIntern(finalEmployees);
         break;
-        case "Quit":
+        case "Finish":
             onQuit(finalEmployees)
     }
 
@@ -99,7 +99,7 @@ const createIntern = () => {
         "name":"whichType",
         "message": "Would you like to input an engineer, intern, or exit?",
         "type": "list",
-        "choices": ["Engineer", "Intern", "Quit"]
+        "choices": ["Engineer", "Intern", "Finish"]
     }
 
 ]).then( (answers) => {
@@ -114,7 +114,7 @@ const createIntern = () => {
         case "Intern":
             createIntern(finalEmployees);
         break;
-        case "Quit":
+        case "Finish":
             onQuit(finalEmployees)
     }
 
@@ -153,14 +153,17 @@ var row = "<div class='row mb-3'>";
 
             // this is to only allow 3 cards on each row 
             let currentCard =`
-<div class='col-3'>
-    <div class='card'>
+<div class='col-4'>
+    <div class='card shadow rounded border-0'>
+        <div class='card-body title-wrapper'>
+
+            <h5 class='card-title text-center'>${finalEmployees[i].name}</h5>
+            <h6 class='card-subtitle text-center'>${finalEmployees[i].role}</h6>
+        </div>
         <div class='card-body'>
-            <h5 class='card-title'>${finalEmployees[i].name}</h5>
-            <h6 class='card-subtitle mb-1'>${finalEmployees[i].role}</h6>
             <ul class='list-group'>
                 <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
-                <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='list-dark'>${finalEmployees[i].email}</a></li>
+                <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='link-dark'>${finalEmployees[i].email}</a></li>
                 ${roleLi}
             </ul>
         </div>
@@ -175,19 +178,21 @@ var row = "<div class='row mb-3'>";
             
         }
         let currentCard =`
-<div class='col-3'>
-    <div class='card'>
-        <div class='card-body'>
-            <h5 class='card-title'>${finalEmployees[i].name}</h5>
-            <h6 class='card-subtitle mb-1'>${finalEmployees[i].role}</h6>
-            <ul class='list-group'>
-                <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
-                <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='link-dark' >${finalEmployees[i].email}</a></li>
-                ${roleLi}
-            </ul>
+        <div class='col-4'>
+        <div class='card shadow rounded border-0'>
+            <div class='card-body title-wrapper'>
+                <h5 class='card-title text-center'>${finalEmployees[i].name}</h5>
+                <h6 class='card-subtitle text-center'>${finalEmployees[i].role}</h6>
+            </div>
+            <div class='card-body'>
+                <ul class='list-group'>
+                    <li class='list-group-item'>ID: ${finalEmployees[i].ID}</li>
+                    <li class='list-group-item'>Email: <a href='mailto:${finalEmployees[i].email}' class='link-dark'>${finalEmployees[i].email}</a></li>
+                    ${roleLi}
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 `
     row += currentCard;
     }
@@ -273,7 +278,7 @@ loadingQuestion([
         "name":"whichType",
         "message": "Would you like to input an engineer, intern, or exit?",
         "type": "list",
-        "choices": ["Engineer", "Intern", "Quit"]
+        "choices": ["Engineer", "Intern", "Finish"]
     }
 
 ]).then( (answers) => {
@@ -289,7 +294,7 @@ loadingQuestion([
         case "Intern":
             createIntern(finalEmployees);
         break;
-        case "Quit":
+        case "Finish":
             onQuit(finalEmployees)
     }
 

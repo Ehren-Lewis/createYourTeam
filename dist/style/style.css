@@ -1,0 +1,15 @@
+html {
+    overflow-x: hidden;
+}
+
+.title-wrapper {
+    background-color: burlywood;
+    border-radius: 2px 2px 0 0;
+}
+
+.header-title {
+    background-color: salmon;
+    min-height: 50px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
